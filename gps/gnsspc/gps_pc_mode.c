@@ -24,9 +24,9 @@
 #include <stdio.h>
 #include <cutils/log.h>
 #include <stdlib.h>
-#include <unistd.h>    
-#include <sys/stat.h>   
-#include <string.h>  
+#include <unistd.h>
+#include <sys/stat.h>
+#include <string.h>
 #include <semaphore.h>
 #include <dlfcn.h>
 
@@ -140,7 +140,7 @@ static double str2float( const char*  p, const char*  end )
 static int strhex2int( const char*  p, int len )
 {
 	int   result = 0;
-	D("strhex2int: (%s) len=%d \n", p, len);	
+	D("strhex2int: (%s) len=%d \n", p, len);
 	//len = len -1;
 
 	for ( ; len > 0; len--, p++ )
@@ -152,7 +152,7 @@ static int strhex2int( const char*  p, int len )
 
 		if (len <= 0)
 		goto Fail;
-		
+
 		if ((*p >= 'a') && (*p <= 'f'))
 			c = *p - 'a' + 10;
 		else if ((*p >= 'A') && (*p <= 'F'))
@@ -160,7 +160,7 @@ static int strhex2int( const char*  p, int len )
 		else if ((*p >= '0') && (*p <= '9'))
 			c = *p - '0';
 		else
-		{       
+		{
 			D("strhex2int: fail \n");
 			//goto Fail;
 			break;
@@ -168,8 +168,8 @@ static int strhex2int( const char*  p, int len )
 		result = result*0x10 + c;
 	}
 
-	D("strhex2int: (%d) \n", result);	
-	
+	D("strhex2int: (%d) \n", result);
+
 	return  result;
 
 Fail:
@@ -226,15 +226,15 @@ static Token  nmea_tokenizer_get( NmeaTokenizer*  t, int  index )
 	Token  tok;
 	static const char*  dummy = "";
 
-	if (index < 0 || index >= t->count) 
+	if (index < 0 || index >= t->count)
 	{
 		tok.p = tok.end = dummy;
-	} 
+	}
 	else
 	{
 		tok = t->tokens[index];
 	}
-	
+
 	return tok;
 }
 
@@ -246,7 +246,7 @@ static int nmea_update_cwcn(Token cwcn)
 		return -1;
 	pthread_mutex_lock(&mutex_cwcn);
 	cwcn_value = str2int(tok.p, tok.end);
-	D("nmea_update_cwcn: value=%d \n", cwcn_value);	
+	D("nmea_update_cwcn: value=%d \n", cwcn_value);
 	pthread_mutex_unlock(&mutex_cwcn);
 	return 0;
 }
@@ -298,12 +298,12 @@ static void  nmea_parse(const char* nmea, int length)
 	nmea_tokenizer_init(tzer, nmea, nmea+length);
 
 	tok = nmea_tokenizer_get(tzer, 0);
-	if (tok.p + 5 > tok.end) 
+	if (tok.p + 5 > tok.end)
 	{
 		//E("sentence id '%.*s' too short, ignored.", tok.end-tok.p, tok.p);
 		return;
 	}
-	
+
 	//if ( !memcmp(tok.p,"PCGDS",5))
 	if ( !memcmp(tok.p,"PCGDS",5))
 	{
@@ -395,7 +395,7 @@ static void request_utc_time_callback()
 static pthread_t create_thread_callback(const char* name, void (*start)(void *), void* arg)
 {
 	pthread_t pid;
-	D("%s called\n",__FUNCTION__); 
+	D("%s called\n",__FUNCTION__);
 	pthread_create(&pid, NULL,(void *)start, arg);
 	return pid;
 }
@@ -427,7 +427,7 @@ int write_register(unsigned int addr,unsigned int value)
 unsigned int read_register(unsigned int addr)
 {
 	unsigned int value = 0;
-	
+
 	D("read_register =>> addr=0x%x\n",addr);
 	value = hal_read_register(addr);
 	D("read_register =>> addr=0x%x, value=0x%x\n",addr, value);
@@ -463,7 +463,7 @@ void set_pc_mode(char input_pc_mode)
 
 int start_engine(void)
 {
-	pid_t pid; 
+	pid_t pid;
 	pid=fork();
 	if(pid==0)
 	{
@@ -507,7 +507,7 @@ int gps_export_start(void)
 		E("start fail,for not init");
 		return ret;
 	}
-   	//pGpsface->start(); 
+   	//pGpsface->start();
 	//in future,should add ge2 option,such as if((eut_gps_state == 1) && (hardware = CELLGUIDE))
 	//if((eut_gps_state == 1)&&(chip_id == GREENEYE_I))
 	if(chip_id == GREENEYE_I)
@@ -520,7 +520,7 @@ int gps_export_start(void)
 		//	ret = start_engine();
 		//}
 		sleep(1);
-		pGpsface->start(); 
+		pGpsface->start();
 		sleep(1);
 	}
 	else
@@ -543,7 +543,7 @@ int gps_export_stop(void)
 		E("stop fail,for not init");
 		return ret;
 	}
-   	pGpsface->stop(); 
+   	pGpsface->stop();
 	sleep(4);
 	return ret;
 }
@@ -622,7 +622,7 @@ int get_nmea_data(char *nbuff)
 }
 
 
-void astatus_cb(AGpsStatus* status)
+int astatus_cb(AGpsStatus* status)
 {
     return 0;
 }
@@ -669,7 +669,7 @@ int get_init_mode(void)
 		}
 		else
 		{
-			//GreenEye			
+			//GreenEye
 			chip_id = GREENEYE_I;
 			if(access("/data/cg",0) == -1)
 			{
@@ -682,7 +682,7 @@ int get_init_mode(void)
 				chmod("/data/cg/online",0777);
 			}
 		}
-		
+
 		D("before dlopen");
 		handle = dlopen("/system/lib/hw/gps.default.so", RTLD_LAZY);
 		if (!handle) {
@@ -701,8 +701,8 @@ int get_init_mode(void)
 		D("obtain GPS HAL interface \n");
 		pGpsface = get_interface(NULL);
 		pGpsface->init(&sGpsCallbacks);
-		
-		get_extension= dlsym(handle, "gps_get_extension"); 
+
+		get_extension= dlsym(handle, "gps_get_extension");
 		pAGpsface = get_extension("agps");
 		pAGpsface->init(&acallbacks);
 		first_open = 1;
@@ -721,7 +721,7 @@ int eut_parse(int data,int sub_data, char *rsp)
 	eutmode = 1;
 
 	if((data == 1)||(data == 2)||(data == 3)||(data == 4))
-	{	
+	{
 		D("%s\n", version);
 		eut_gps_state = 1;
 		if(first_open == 0)
@@ -729,7 +729,7 @@ int eut_parse(int data,int sub_data, char *rsp)
 			get_init_mode();
 			gps_mode = 0;
 		}
-		
+
 		if(data == 2)
 		{
 			eut_gps_state = 2;
@@ -753,7 +753,7 @@ int eut_parse(int data,int sub_data, char *rsp)
 			pGpsface->delete_aiding_data(65535);	// factory start
 			gps_mode = 0;
 		}
-		
+
 		gps_export_start();
 		strcpy(rsp,EUT_GPS_OK);
 	}
@@ -781,7 +781,7 @@ int search_eq_parse(int data,int sub_data,char *rsp)
 }
 
 int search_parse(int data,int sub_data,char *rsp)
-{	
+{
 	if(data != eut_gps_state)
 	{
 		eut_parse(data,sub_data,rsp);
@@ -894,7 +894,7 @@ int fix_parse(int data,int sub_data,char *rsp)
 	{
 		E("fix_parse: cannot fix location \n");
 		sprintf(rsp,"+SPGPSTEST:LOCATION=FAIL");
-	}	
+	}
 	else
 	{
 		E("fix_parse: fixed \n");
@@ -904,7 +904,7 @@ int fix_parse(int data,int sub_data,char *rsp)
 }
 
 int cwcn_parse(int data,int sub_data,char *rsp)
-{	
+{
 	D("cwcn_parse  enter");
 	if((gps_search_state == 0) && (eut_gps_state == 0))
 	{
@@ -932,7 +932,7 @@ int cwcn_parse(int data,int sub_data,char *rsp)
 }
 
 int tsx_temp_parse(int data,int sub_data,char *rsp)
-{	
+{
 	int i=0;
 	double tsx_temp = 0.0;
 
@@ -943,7 +943,7 @@ int tsx_temp_parse(int data,int sub_data,char *rsp)
 		sprintf(rsp,"%s%d",EUT_GPS_ERROR,EUT_GPSERR_PRNSEARCH);
 		return 0;
 	}
-	
+
 	#if 0
 	for(i=0;i<10;i++)
 	{
@@ -970,7 +970,7 @@ int tsx_temp_parse(int data,int sub_data,char *rsp)
 }
 
 int tcxo_stability_parse(int data,int sub_data,char *rsp)
-{	
+{
 	D("tcxo_stability_parse  enter");
 	if((gps_search_state == 0) && (eut_gps_state == 0))
 	{
@@ -988,10 +988,10 @@ int tcxo_stability_parse(int data,int sub_data,char *rsp)
 }
 
 int eut_read_register(int addr, int sub_data, char *rsp)
-{	
-	D("eut_read_register  enter");	
+{
+	D("eut_read_register  enter");
 	unsigned int value = 0;
-	
+
 	if((gps_search_state == 0) && (eut_gps_state == 0))
 	{
 		E("eut_read_register: gps has not search");
@@ -1000,17 +1000,17 @@ int eut_read_register(int addr, int sub_data, char *rsp)
 	}
 	D("eut_read_register: addr=0x%x \n",addr);
 	value = read_register(addr);
-	
+
 	sprintf(rsp,"%s0x%x",EUT_GPS_READ_REQ,value);
 	D("eut_read_register: %s",rsp);
 	return 0;
 }
 
 int eut_write_register(int addr, int value, char *rsp)
-{	
+{
 	D("eut_write_register  enter");
 	int ret = 0;
-	
+
 	if((gps_search_state == 0) && (eut_gps_state == 0))
 	{
 		E("eut_write_register: gps has not search");
@@ -1031,7 +1031,7 @@ typedef struct
 {
 	char *name;
 	eut_function func;
-}eut_data; 
+}eut_data;
 
 eut_data eut_gps_at_table[ENG_GPS_NUM] = {
 	{"EUT?",eut_eq_parse},
@@ -1067,7 +1067,7 @@ static char *eut_gps_name[ENG_GPS_NUM] = {
 	"SEARCH",
 	"PRNSTATE?",
 	"SNR?",
-	"PRN",	
+	"PRN",
 };
 
 //EUT
@@ -1095,7 +1095,7 @@ int get_sub_str(char *buf, char **revdata, char a, char *delim, unsigned char co
 
     start = strchr(buf, a);
     substr = strstr(buf, delim);
-    
+
     if(!substr)
     {
         /* if current1 not exist, return this function.*/
@@ -1121,7 +1121,7 @@ int get_sub_str(char *buf, char **revdata, char a, char *delim, unsigned char co
 
         /* get sub str by delimeter */
         tokenPtr = strtok(substr, delim);
-        while(NULL != tokenPtr && index < count) 
+        while(NULL != tokenPtr && index < count)
         {
             strncpy(revdata[index++], tokenPtr, substr_max_len);
 
@@ -1144,7 +1144,7 @@ int get_sub_str_colon(char *buf, char **revdata, char a, char *delim, unsigned c
 
     start = strchr(buf, a);
     substr = strstr(buf, delim);
-    
+
     if(!substr)
     {
         /* if current1 not exist, return this function.*/
@@ -1170,7 +1170,7 @@ int get_sub_str_colon(char *buf, char **revdata, char a, char *delim, unsigned c
 
         /* get sub str by delimeter */
         tokenPtr = strtok(substr, ":");
-        while(NULL != tokenPtr && index < count) 
+        while(NULL != tokenPtr && index < count)
         {
             strncpy(revdata[index++], tokenPtr, substr_max_len);
 
@@ -1214,7 +1214,7 @@ void gps_eut_parse(char *buf,char *rsp)
 	for(i = 0;i < ENG_GPS_NUM;i++)
 	{
 		if(strstr(buf,eut_gps_at_table[i].name) != NULL)
-		{			
+		{
 			if(!memcmp(eut_gps_at_table[i].name,"READ",strlen("READ")))
 			{
 				arg1_data = strhex2int(data[1],strlen(data[1]));
@@ -1240,4 +1240,3 @@ void gps_eut_parse(char *buf,char *rsp)
 	}
 	return;
 }
-

@@ -10,7 +10,7 @@ LOCAL_SRC_FILES := \
 	src/android_support.cpp \
     vpp_deinterlace/vpp_deint_api.c \
     vpp_deinterlace/vpp_drv_interface.c
-	
+
 LOCAL_CFLAGS := -DCONFIG_DEBUG_LEVEL=15 -DANDROID_PLATFORM_SDK_VERSION=$(PLATFORM_SDK_VERSION)
 #LOCAL_CFLAGS    += -g
 #LOCAL_CFLAGS += -DCNM_FPGA_PLATFORM
@@ -18,10 +18,10 @@ LOCAL_CFLAGS := -DCONFIG_DEBUG_LEVEL=15 -DANDROID_PLATFORM_SDK_VERSION=$(PLATFOR
 
 
 
-	
+
 LOCAL_MODULE_TAGS := eng
 LOCAL_MODULE := libomxvpu
-	
+
 
 
 
@@ -39,10 +39,10 @@ LOCAL_SHARED_LIBRARIES :=       \
 	libsync	                \
 	libmemoryheapion        \
 	libui
-		
 
-		
-	
+
+
+
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/src		\
@@ -58,8 +58,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/src		\
 					$(TOP)/frameworks/base/include/media/stagefright \
 					$(TOP)/vendor/sprd/open-source/libs/gralloc \
 					$(TOP)/vendor/sprd/open-source/libs/libmemoryheapion \
-					$(TARGET_OUT_INTERMEDIATES)/KERNEL/usr/include/video
-					
+					$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video
+
 ifeq ($(strip $(TARGET_GPU_PLATFORM)),midgard)
 LOCAL_C_INCLUDES += $(TOP)/vendor/sprd/modules/libgpu/gralloc/midgard
 else
@@ -67,7 +67,7 @@ LOCAL_C_INCLUDES += $(TOP)/vendor/sprd/modules/libgpu/gralloc/utgard
 endif
 
 # needed for #include <libyuv.h> to use ConvertRgbToYuvbySW in android_support.h
-LOCAL_C_INCLUDES += $(TOP)/external/libyuv/files/include				
+LOCAL_C_INCLUDES += $(TOP)/external/libyuv/files/include
 # needed for #include <gralloc_priv.h> to use getAndroidNativeBufferHandleInfo in android_support.h
 # SHOULD change your libgralloc path
 LOCAL_C_INCLUDES += $(TOP)/hardware/qcom/display/msm8974/libgralloc

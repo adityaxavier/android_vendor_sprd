@@ -653,7 +653,7 @@ int SprdHWLayerList:: prepareOSDLayer(SprdHWLayer *l)
             {
                 ALOGI_IF(mDebugFlag, "prepareOSDLayer Use GPU to accelerate L:%d", __LINE__);
             }
-        } 
+        }
         else
         {
             l->setLayerAccelerator(ACCELERATOR_GSP);
@@ -730,6 +730,7 @@ int SprdHWLayerList:: prepareOSDLayer(SprdHWLayer *l)
         }
     }
 
+#ifdef OVERLAY_COMPOSER_GPU
     if (l->getAccelerator() == ACCELERATOR_OVERLAYCOMPOSER)
     {
         int ret = prepareOverlayComposerLayer(l);
@@ -740,7 +741,7 @@ int SprdHWLayerList:: prepareOSDLayer(SprdHWLayer *l)
             return 0;
         }
     }
-
+#endif
     /*
      *  If OSD layer cannot be accerlated by GXP,
      *  can be accerlated by OverlayComposer,

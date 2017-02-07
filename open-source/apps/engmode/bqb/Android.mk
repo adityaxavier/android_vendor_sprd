@@ -15,7 +15,8 @@ LOCAL_C_INCLUDES += \
         $(BDROID_DIR)/gki/ulinux \
         $(BDROID_DIR)/osi/include \
         $(BDROID_DIR)/stack/include \
-        $(BDROID_DIR)/utils/include
+        $(BDROID_DIR)/utils/include \
+				$(BDROID_DIR)
 
 LOCAL_SHARED_LIBRARIES := \
         libcutils \
@@ -36,5 +37,3 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := STATIC_LIBRARIES
 LOCAL_MULTILIB := 32
 include $(BUILD_STATIC_LIBRARY)
-
-

@@ -4,15 +4,18 @@
 #include <sys/ioctl.h>
 #include <linux/ion.h>
 #include "ion_sprd.h"
+#include <linux/fb.h>
+
+#define FB_ACTIVATE_NODISP	4   /* set values immediately (or vbl) but no screen update*/
 
 enum
 {
         /* OEM specific HAL formats */
-        HAL_PIXEL_FORMAT_YCbCr_420_P = 0x13,
+  HAL_PIXEL_FORMAT_YCbCr_420_P = 0x13,
 	HAL_PIXEL_FORMAT_YCbCr_420_SP = 0x15, /*OMX_COLOR_FormatYUV420SemiPlanar*/
 	HAL_PIXEL_FORMAT_YCrCb_422_SP = 0x1B,
 	HAL_PIXEL_FORMAT_YCrCb_420_P = 0x1C,
-}; 
+};
 
 enum
 {
@@ -20,6 +23,7 @@ enum
 	GRALLOC_USAGE_OVERLAY_BUFFER		=  0x03000000,
 	GRALLOC_USAGE_VIDEO_BUFFER		=  0x05000000,
 	GRALLOC_USAGE_CAMERA_BUFFER 		=  0x05000000,
+  GRALLOC_USAGE_HW_TILE_ALIGN         =  0x08000000
 };
 #ifdef __cplusplus
 extern "C" {

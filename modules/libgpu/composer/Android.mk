@@ -43,7 +43,8 @@ LOCAL_SRC_FILES := SprdHWComposer.cpp \
                    dump.cpp
 LOCAL_C_INCLUDES := \
 	$(TOP)/vendor/sprd/open-source/libs/libmemoryheapion \
-	$(TARGET_OUT_INTERMEDIATES)/KERNEL/usr/include/video \
+	$(TOP)/vendor/sprd/open-source/libs/libion_sprd/sc8830/include \
+	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video \
 
 ifeq ($(strip $(TARGET_GPU_PLATFORM)),midgard)
 LOCAL_C_INCLUDES += $(TOP)/vendor/sprd/modules/libgpu/gralloc/midgard
@@ -82,7 +83,9 @@ endif
 #SPRD_HWC_DEBUG_TRACE := false
 
 ifeq ($(strip $(DEVICE_WITH_GSP)),true)
-	LOCAL_C_INCLUDES += $(LOCAL_PATH)/../libcamera/sc8830/inc	
+	LOCAL_C_INCLUDES += $(LOCAL_PATH)/../libcamera/sc8830/inc \
+		$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video \
+
 	#LOCAL_CFLAGS += -DVIDEO_LAYER_USE_RGB
 	# PROCESS_VIDEO_USE_GSP : protecting sc8830 code
 	LOCAL_CFLAGS += -DPROCESS_VIDEO_USE_GSP

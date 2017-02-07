@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <string.h>
 
 #if 1
 #define ALOGI(x...)  fprintf(stderr, "AtChannelTest: " x)

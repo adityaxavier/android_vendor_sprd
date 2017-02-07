@@ -1,1 +1,0 @@
-dns6.o: dns6.c dns6.h

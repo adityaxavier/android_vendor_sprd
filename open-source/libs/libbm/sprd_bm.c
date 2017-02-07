@@ -72,7 +72,7 @@ unsigned short sprd_bm_get_chn_cnt(void)
 	return bm_cnt;
 }
 
-unsigned long sprd_bm_get_chn_name(int bm_index)
+unsigned char *sprd_bm_get_chn_name(int bm_index)
 {
 	unsigned long i, cmd;
 
@@ -136,4 +136,3 @@ unsigned long sprd_bm_get_time(void)
 		BM_LOGE("bm get bm kernel time fail");
 	return kernel_time;
 }
-

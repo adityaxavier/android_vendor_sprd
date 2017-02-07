@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "math.h"
+#include "string.h"
 #include <utils/Timers.h>
 #include <time.h>
 #include <sys/time.h>
@@ -284,8 +285,8 @@ static bool image_dither_precheck(struct img_dither_in_param *in_param)
             x0 = value & 0xff;
             x1 = (value >> 8) & 0xff;
             x2 = (value >> 16) & 0xff;
-            if((ABS((x0 - c0)) > COLOR_DIFF_ALLOWED) 
-				|| (ABS((x1 - c1)) > COLOR_DIFF_ALLOWED) 
+            if((ABS((x0 - c0)) > COLOR_DIFF_ALLOWED)
+				|| (ABS((x1 - c1)) > COLOR_DIFF_ALLOWED)
 				|| (ABS((x2 - c2)) > COLOR_DIFF_ALLOWED)) {
 				IMG_DITHER_LOGV("******************** true do dither %d %d %d %d %d %d %d %d", i, j, x0, x1, x2, c0, c1, c2);
                 return true;

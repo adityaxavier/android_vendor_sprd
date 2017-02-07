@@ -29,6 +29,7 @@
 #include <utils/Vector.h>
 #include <hardware/hardware.h>
 #include <hardware/gralloc.h>
+#include <linux/fb.h>
 
 #include <GLES/gl.h>
 
@@ -307,9 +308,9 @@ static void writeFpsToProc(float fps)
 	char fps_buf[256] = {0};
 	const char *fps_proc = "/proc/benchMark/fps";
 	int fpsInt = (int)(fps+0.5);
-	
+
 	sprintf(fps_buf, "fps:%d", fpsInt);
-	   
+
 	FILE *f = fopen(fps_proc,"r+w");
 	if (NULL != f)
 	{
@@ -318,7 +319,7 @@ static void writeFpsToProc(float fps)
 		fclose(f);
 	}
 }
-  
+
 bool gIsApctFpsShow = false;
 bool gIsApctRead  = false;
 bool getApctFpsSupport()

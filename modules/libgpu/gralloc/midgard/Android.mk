@@ -1,6 +1,6 @@
-# 
+#
 # Copyright (C) 2010 ARM Limited. All rights reserved.
-# 
+#
 # Copyright (C) 2008 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -94,8 +94,8 @@ else
 LOCAL_C_INCLUDES += system/core/libion/include
 endif
 LOCAL_C_INCLUDES += \
-    $(TARGET_OUT_INTERMEDIATES)/KERNEL/usr/include/video/ \
-    $(TARGET_OUT_INTERMEDIATES)/KERNEL/
+    $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video/ \
+    $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/
 
 
 ifeq ($(GRALLOC_FB_SWAP_RED_BLUE),1)

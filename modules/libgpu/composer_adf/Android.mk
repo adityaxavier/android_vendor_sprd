@@ -45,7 +45,7 @@ LOCAL_SRC_FILES := SprdHWComposer.cpp \
                    dump.cpp
 LOCAL_C_INCLUDES := \
 	$(TOP)/vendor/sprd/open-source/libs/libmemoryheapion \
-	$(TARGET_OUT_INTERMEDIATES)/KERNEL/usr/include/video
+	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video
 
 LOCAL_MODULE := hwcomposer.$(TARGET_BOARD_PLATFORM)
 LOCAL_CFLAGS:= -DLOG_TAG=\"SPRDHWComposer\"
@@ -96,7 +96,7 @@ endif
 #SPRD_HWC_DEBUG_TRACE := false
 
 ifeq ($(strip $(DEVICE_WITH_GSP)),true)
-	LOCAL_C_INCLUDES += $(LOCAL_PATH)/../libcamera/sc8830/inc	
+	LOCAL_C_INCLUDES += $(LOCAL_PATH)/../libcamera/sc8830/inc
 	#LOCAL_CFLAGS += -DVIDEO_LAYER_USE_RGB
 	# PROCESS_VIDEO_USE_GSP : protecting sc8830 code
 	LOCAL_CFLAGS += -DPROCESS_VIDEO_USE_GSP
@@ -214,8 +214,3 @@ include $(BUILD_SHARED_LIBRARY)
 endif
 endif
 include $(call all-makefiles-under,$(LOCAL_PATH))
-
-
-
-
-

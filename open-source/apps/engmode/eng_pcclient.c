@@ -31,7 +31,7 @@ extern int g_armlog_enable;
 extern int	disconnect_vbus_charger(void);
 extern int turnoff_calibration_backlight(void);
 static int eng_iqfeed_start(int num);
-static void eng_check_whether_iqfeed(void);
+static int eng_check_whether_iqfeed(void);
 
 static struct eng_param cmdparam = {
     .califlag = 0,
@@ -353,7 +353,7 @@ int eng_usb_state(void)
     return ret;
 }
 
-static void eng_get_usb_int(int argc, char** argv, char* at_dev, char* diag_dev, char* log_dev, char* type)
+static char *eng_get_usb_int(int argc, char** argv, char* at_dev, char* diag_dev, char* log_dev, char* type)
 {
     int opt  = -1;
 
@@ -425,21 +425,22 @@ static int eng_iqfeed_start(int num)
 	return ret;
 }
 
-static void eng_check_whether_iqfeed(void)
+static int eng_check_whether_iqfeed(void)
 {
 	int ret, err;
 	if (0 == access(IQMODE_FLAG_PATH, F_OK)) {
 		err = remove(IQMODE_FLAG_PATH);
 		if(err < 0) {
 			ENG_LOG("%s: delete iqfeed flag file fail, %s\n", __FUNCTION__, strerror(errno));
-			return NULL;
+			return 0;
 		}
 		ret = eng_iqfeed_start(5);//start 5 times
 		if(ret < 0) {
 			ENG_LOG("%s: iqfeed start fail\n", __FUNCTION__);
-			return NULL;
+			return 0;
 		}
 	}
+  return ret;
 }
 
 int main (int argc, char** argv)

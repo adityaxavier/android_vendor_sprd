@@ -22,7 +22,8 @@ BLUEDROID_PATH := system/bt/
 LOCAL_SRC_FILES := bt_cmd_executer.c \
                    bt_engpc_sprd.c
 LOCAL_C_INCLUDES += $(BLUEDROID_PATH)stack/include \
-                    $(BLUEDROID_PATH)include
+                    $(BLUEDROID_PATH)include \
+										$(BLUEDROID_PATH) \
 
 LOCAL_MODULE := libengbt
 LOCAL_MODULE_TAGS := debug
@@ -44,7 +45,7 @@ include $(CLEAR_VARS)
 
 LOCAL_PRELINK_MODULE := false
 
-LOCAL_SRC_FILES := bt_cmd_executer_origin.c 
+LOCAL_SRC_FILES := bt_cmd_executer_origin.c
 
 ifeq ($(BOARD_SPRD_WCNBT_SR2351),true)
   LOCAL_CFLAGS += -DSPRD_WCNBT_SR2351
@@ -66,5 +67,3 @@ LOCAL_SHARED_LIBRARIES += libcutils   \
 include $(BUILD_SHARED_LIBRARY)
 
 endif
-
-

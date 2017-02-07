@@ -28,20 +28,19 @@ LOCAL_MODULE := libvpu
 LOCAL_CFLAGS := -DCONFIG_DEBUG_LEVEL=255
 # LOCAL_CFLAGS += -DCNM_FPGA_PLATFORM
 
-LOCAL_STATIC_LIBRARIES := 
+LOCAL_STATIC_LIBRARIES :=
 
 LOCAL_SHARED_LIBRARIES :=         \
 		libutils          \
 		libdl             \
 		liblog            \
 		libmemoryheapion
-		
+
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/src		\
 		$(TOP)/vendor/sprd/open-source/libs/vpu	\
 		$(TOP)/vendor/sprd/open-source/libs/vpu/include \
 		$(TOP)/vendor/sprd/open-source/libs/vpu/vdi \
 		$(TOP)/vendor/sprd/open-source/libs/libmemoryheapion \
-		$(TARGET_OUT_INTERMEDIATES)/KERNEL/usr/include/video \
+		$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video \
 
 include $(BUILD_SHARED_LIBRARY)
-

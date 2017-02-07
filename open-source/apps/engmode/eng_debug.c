@@ -35,7 +35,7 @@ int eng_file_unlock(int fd)
      return 0;
 }
 
-void* eng_printlog_thread(void *x)
+int eng_printlog_thread(void *x)
 {
     int ret = -1;
     int fd = -1;

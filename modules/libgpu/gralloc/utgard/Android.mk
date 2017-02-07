@@ -1,6 +1,6 @@
-# 
+#
 # Copyright (C) 2010 ARM Limited. All rights reserved.
-# 
+#
 # Copyright (C) 2008 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,12 +54,12 @@ MALI_DDK_PATH := vendor/sprd/modules/libgpu
 SHARED_MEM_LIBS := libion libhardware
 LOCAL_SHARED_LIBRARIES := liblog libcutils libGLESv1_CM $(SHARED_MEM_LIBS)
 
-LOCAL_C_INCLUDES := system/core/include/ $(MALI_DDK_PATH)/include 
+LOCAL_C_INCLUDES := system/core/include/ $(MALI_DDK_PATH)/include
 # Include the UMP header files
 LOCAL_C_INCLUDES := $(MALI_DDK_PATH)/mali/src/ump/include
 LOCAL_C_INCLUDES += \
-    $(TARGET_OUT_INTERMEDIATES)/KERNEL/usr/include/video/ \
-    $(TARGET_OUT_INTERMEDIATES)/KERNEL/
+    $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video/ \
+    $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/
 
 LOCAL_CFLAGS := -DLOG_TAG=\"gralloc.$(TARGET_BOARD_PLATFORM)\" -DGRALLOC_32_BITS -DPLATFORM_SDK_VERSION=$(PLATFORM_SDK_VERSION)
 #LOCAL_CFLAGS := -DLOG_TAG=\"gralloc\" -DGRALLOC_32_BITS -DSTANDARD_LINUX_SCREEN -DPLATFORM_SDK_VERSION=$(PLATFORM_SDK_VERSION)
