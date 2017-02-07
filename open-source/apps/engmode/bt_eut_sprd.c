@@ -1087,9 +1087,9 @@ int bt_tx_set(int on_off, int instru_tx_mode, unsigned int pktcnt, char *rsp) {
         ENG_LOG("ADL %s(), call set_nonsig_tx_testmode(), enable = 0, is_ble = %d, g_bt_mode = %d, "
                 "the rest of other parameters all 0.",
                 __func__, is_ble, g_bt_mode);
-#if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
-        ret = g_sBtInterface->set_nonsig_tx_testmode(0, is_ble, 0, 0, 0, 0, 0, 0, 0);
-#endif
+// #if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
+//         ret = g_sBtInterface->set_nonsig_tx_testmode(0, is_ble, 0, 0, 0, 0, 0, 0, 0);
+// #endif
         ENG_LOG("ADL %s(), called set_nonsig_tx_testmode(), ret = %d", __func__, ret);
 
         if (0 == ret) {
@@ -1111,11 +1111,11 @@ int bt_tx_set(int on_off, int instru_tx_mode, unsigned int pktcnt, char *rsp) {
             "%d, pac_type = %d, pac_len = %d, pwr_type = %d, pwr_value = %d, pkt_cnt = %d",
             __func__, is_ble, (int)g_bteut_tx.pattern, g_bteut_tx.channel, g_bteut_tx.pkttype,
             g_bteut_tx.pktlen, g_bteut_tx.txpwr.power_type, g_bteut_tx.txpwr.power_value, pktcnt);
-#if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
-        ret = g_sBtInterface->set_nonsig_tx_testmode(
-            1, is_ble, g_bteut_tx.pattern, g_bteut_tx.channel, g_bteut_tx.pkttype,
-            g_bteut_tx.pktlen, g_bteut_tx.txpwr.power_type, g_bteut_tx.txpwr.power_value, pktcnt);
-#endif
+// #if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
+//         ret = g_sBtInterface->set_nonsig_tx_testmode(
+//             1, is_ble, g_bteut_tx.pattern, g_bteut_tx.channel, g_bteut_tx.pkttype,
+//             g_bteut_tx.pktlen, g_bteut_tx.txpwr.power_type, g_bteut_tx.txpwr.power_value, pktcnt);
+// #endif
         ENG_LOG("ADL %s(), called set_nonsig_tx_testmode(), ret = %d", __func__, ret);
 
         if (0 == ret) {
@@ -1230,9 +1230,9 @@ int bt_rx_set(int on_off, char *rsp) {
         ENG_LOG("ADL %s(), call set_nonsig_rx_testmode(), enable = 0, le = 0, the rest of other "
                 "parameters all 0.",
                 __func__);
-#if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
-        ret = g_sBtInterface->set_nonsig_rx_testmode(0, is_ble, 0, 0, 0, 0, addr);
-#endif
+// #if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
+//         ret = g_sBtInterface->set_nonsig_rx_testmode(0, is_ble, 0, 0, 0, 0, addr);
+// #endif
         ENG_LOG("ADL %s(), called set_nonsig_rx_testmode(), ret = %d", __func__, ret);
 
         if (0 == ret) {
@@ -1262,11 +1262,11 @@ int bt_rx_set(int on_off, char *rsp) {
                 "channel = %d, pac_type = %d, rxgain_value = %d, addr = %s",
                 __func__, (int)g_bteut_rx.pattern, g_bteut_rx.channel, g_bteut_rx.pkttype,
                 rxgain_value, g_bteut_rx.addr);
-#if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
-        ret = g_sBtInterface->set_nonsig_rx_testmode(1, is_ble, g_bteut_rx.pattern,
-                                                     g_bteut_rx.channel, g_bteut_rx.pkttype,
-                                                     rxgain_value, addr);
-#endif
+// #if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
+//         ret = g_sBtInterface->set_nonsig_rx_testmode(1, is_ble, g_bteut_rx.pattern,
+//                                                      g_bteut_rx.channel, g_bteut_rx.pkttype,
+//                                                      rxgain_value, addr);
+// #endif
         ENG_LOG("ADL %s(), called set_nonsig_rx_testmode(), ret = %d", __func__, ret);
 
         if (0 == ret) {
@@ -1373,16 +1373,16 @@ int bt_rxdata_get(char *rsp) {
             }
 
             ENG_LOG("ADL %s(), call get_nonsig_rx_data(), ble = %d", __func__, ble);
-#if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
-            ret = g_sBtInterface->get_nonsig_rx_data(ble);
-#endif
+// #if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
+//             ret = g_sBtInterface->get_nonsig_rx_data(ble);
+// #endif
             ENG_LOG("ADL %s(), called get_nonsig_rx_data(), ret = %d", __func__, ret);
 
-            if (0 != ret) {
-                ENG_LOG("ADL %s(), call get_nonsig_rx_data() is ERROR, ret = %d, goto err",
-                        __func__, ret);
-                goto err;
-            }
+            // if (0 != ret) {
+            //     ENG_LOG("ADL %s(), call get_nonsig_rx_data() is ERROR, ret = %d, goto err",
+            //             __func__, ret);
+            //     goto err;
+            // }
         } else {
             ENG_LOG("ADL %s(), rf_status is ERROR, ret = %d, goto err", __func__, bt_txrx_status);
             goto err;
@@ -1480,7 +1480,7 @@ void nonsig_test_rx_rece_callback(bt_status_t status, uint8_t rssi, uint32_t pkt
         g_bt_rx_data.error_packets = pkt_err_cnt;
         g_bt_rx_data.total_packets = pkt_cnt;
 
-        g_bt_rx_data.is_update = 1;  //ÓÃÀ´±ê¼Ç¸Ä×éÊý¾ÝÊÇ·ñµÃµ½¸üÐÂ,¼´,ÊÇ·ñÊÇ´Óµ×²ãÈ¡µÃµÄÓÐÐ§Öµ.
+        g_bt_rx_data.is_update = 1;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½,ï¿½Ç·ï¿½ï¿½Ç´Óµ×²ï¿½È¡ï¿½Ãµï¿½ï¿½ï¿½Ð§Öµ.
     } else {
         /* Try get data from Chip */
         ENG_LOG("ADL %s(), status is 1, try again.", __func__);
@@ -1494,9 +1494,9 @@ void nonsig_test_rx_rece_callback(bt_status_t status, uint8_t rssi, uint32_t pkt
                 ble = 1;
             }
 
-#if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
-            g_sBtInterface->get_nonsig_rx_data(ble);
-#endif
+// #if defined(SPRD_WCNBT_MARLIN) || defined(SPRD_WCNBT_SR2351)
+//             g_sBtInterface->get_nonsig_rx_data(ble);
+// #endif
         }
     }
 

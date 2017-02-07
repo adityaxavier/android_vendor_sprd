@@ -127,7 +127,7 @@ static int start_gser(char* ser_path)
         close(pc_fd);
     }
 
-    ENG_LOG("open serial\n");
+    ENG_LOG("open serial %s\n", ser_path);
     pc_fd = open(ser_path,O_RDWR);
     if(pc_fd < 0) {
         ENG_LOG("cannot open vendor serial\n");

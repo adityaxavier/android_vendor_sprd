@@ -31,7 +31,7 @@ LOCAL_C_INCLUDES    += hardware/libhardware/include \
 LOCAL_C_INCLUDES    +=  external/sqlite/dist/
 LOCAL_C_INCLUDES    +=  vendor/sprd/open-source/libs/libatchannel/
 LOCAL_C_INCLUDES    +=  vendor/sprd/gps/gnsspc/
-LOCAL_C_INCLUDES    +=  $(TARGET_OUT_INTERMEDIATES)/KERNEL/source/include/uapi/mtd/
+LOCAL_C_INCLUDES    +=  $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/source/include/uapi/mtd/
 LOCAL_C_INCLUDES += vendor/sprd/open-source/libs/libbm/
 
 LOCAL_SRC_FILES     := eng_pcclient.c  \

@@ -36,7 +36,7 @@ static pthread_t ntid_bqb = (pthread_t)(-1);
 
 extern int eng_controller2tester(char * controller_buf, unsigned int data_len);
 extern int sprd_bt_bqb_init(void);
-extern void sprd_bt_lpm_wake_up(void);
+// extern void sprd_bt_lpm_wake_up(void);
 extern void sprd_bt_power_ctrl(unsigned char on);
 
 static void thread_exit_handler(int sig)
@@ -153,7 +153,7 @@ void eng_send_data(char * data, int data_len)
 
     while(count)
     {
-        sprd_bt_lpm_wake_up();
+        // sprd_bt_lpm_wake_up();
 
         nWritten = write(bt_fd, data, data_len);
         count -= nWritten;
@@ -162,4 +162,3 @@ void eng_send_data(char * data, int data_len)
     }
     ENG_LOG("bqb test eng_send_data nWritten %d ", nWritten);
 }
-

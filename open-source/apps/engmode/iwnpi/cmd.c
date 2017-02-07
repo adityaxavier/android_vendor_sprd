@@ -188,7 +188,7 @@ static int npi_set_reg_cmd(struct nlnpi_state *state,
 		if (err) {
 			fprintf(stderr, "Invild start_addr format\n");
 			return 2;
-		}	
+		}
 		data[0] = REG_RF;
 	} else if (strncmp(argv[0], "phy0", 4) == 0) {
 		start_addr = strtol(argv[1], err, 16);
@@ -335,8 +335,8 @@ static int print_reply_rx_count_data(struct nl_msg *msg, void *arg)
 			snprintf(ret_result_buf, WLNPI_RES_BUF_LEN, "ret: Invild len %d :end\n",
 			       nla_len(tb_msg[NLNPI_ATTR_REPLY_DATA]));
 		}
-		printf(ret_result_buf);
-		ALOGD(ret_result_buf);
+		// printf(ret_result_buf);
+		// ALOGD(ret_result_buf);
 	} else {
 		printf("ret: Failed to get result! :end\n");
 		ALOGD("ret: Failed to get result! :end");
@@ -361,8 +361,8 @@ static int print_reply_int_data(struct nl_msg *msg, void *arg)
 		else
 			snprintf(ret_result_buf, WLNPI_RES_BUF_LEN, "ret: Invild len %d :end\n", *(unsigned int *)
 			       nla_data(tb_msg[NLNPI_ATTR_REPLY_DATA]));
-		printf(ret_result_buf);
-		ALOGD(ret_result_buf);
+		// printf(ret_result_buf);
+		// ALOGD(ret_result_buf);
 	} else {
 		printf("ret: Failed to get result! :end\n");
 		ALOGD("ret: Failed to get result! :end");
@@ -694,10 +694,9 @@ TOPLEVEL(get_debug, "<value_name>", NLNPI_CMD_GET_DEBUG,
 	 0, npi_get_debug_cmd, NULL);
 
  NPI_GET_ARGINT_CMD(lna_status, NLNPI_ATTR_GET_LNA_STATUS, print_reply_int_data, 4)
- 
+
  TOPLEVEL(lna_on, NULL, NLNPI_CMD_LNA_ON, 0, npi_set_noarg_cmd, "lna no");
  TOPLEVEL(lna_off, NULL, NLNPI_CMD_LNA_OFF, 0, npi_set_noarg_cmd, "lna off");
  TOPLEVEL(lna_status, NULL, NLNPI_CMD_GET_LNA_STATUS, 0, npi_lna_status_cmd, "Get lna status.");
  TOPLEVEL(speed_up, NULL, NLNPI_CMD_SPEED_UP, 0, npi_set_noarg_cmd, "speed up");
  TOPLEVEL(speed_down, NULL, NLNPI_CMD_SPEED_DOWN, 0, npi_set_noarg_cmd, "speed down");
-

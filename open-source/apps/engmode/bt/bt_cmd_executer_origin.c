@@ -547,11 +547,11 @@ static BT_ENG_ERROR_E bteng_set_nonsig_recv_data(uint16_t le) {
         return err;
     }
 
-    if ((sBtInterface->get_nonsig_rx_data(le)) != BT_STATUS_SUCCESS) {
-        BTENG_LOGD("%s, get_nonsig_rx_data, err: %d", __FUNCTION__, err);
-
-        return err;
-    }
+    // if ((sBtInterface->get_nonsig_rx_data(le)) != BT_STATUS_SUCCESS) {
+    //     BTENG_LOGD("%s, get_nonsig_rx_data, err: %d", __FUNCTION__, err);
+    //
+    //     return err;
+    // }
 
     return BT_ENG_NONE_ERROR;
 }
@@ -616,13 +616,13 @@ static BT_ENG_ERROR_E bteng_set_nonsig_rx_testmode(uint32_t *data, char *paddr) 
                addr.address[2], addr.address[3], addr.address[4], addr.address[5]);
 
     /* enable: 0 NONSIG_RX_DISABLE      1 NONSIG_RX_ENABLE*/
-    err = sBtInterface->set_nonsig_rx_testmode(enable, is_le, pattern, channel, pac_type, rx_gain,
-                                               addr);
-    if (err != BT_STATUS_SUCCESS) {
-        BTENG_LOGD("%s, set_nonsig_tx_testmode, err: %d", __FUNCTION__, err);
-        return BT_ENG_RX_TEST_ERROR;
-    } else
-        bteng_send_back_cmd_result(bteng_client_fd, "set_nosig_rx_testmode_ok\n", 1);
+    // err = sBtInterface->set_nonsig_rx_testmode(enable, is_le, pattern, channel, pac_type, rx_gain,
+    //                                            addr);
+    // if (err != BT_STATUS_SUCCESS) {
+    //     BTENG_LOGD("%s, set_nonsig_tx_testmode, err: %d", __FUNCTION__, err);
+    //     return BT_ENG_RX_TEST_ERROR;
+    // } else
+    //     bteng_send_back_cmd_result(bteng_client_fd, "set_nosig_rx_testmode_ok\n", 1);
 
     BTENG_LOGD("bteng_set_nonsig_rx_testmode return SUCCESS");
 
@@ -725,13 +725,13 @@ static BT_ENG_ERROR_E bteng_set_nonsig_tx_testmode(uint32_t *data) {
     BTENG_LOGD("pac_cnt    = %d", pac_cnt);
 
     /* enable: 0 NONSIG_TX_DISABLE      1 NONSIG_TX_ENABLE*/
-    err = sBtInterface->set_nonsig_tx_testmode(enable, is_le, pattern, channel, pac_type, pac_len,
-                                               power_type, power_value, pac_cnt);
-    if (err != BT_STATUS_SUCCESS) {
-        BTENG_LOGD("%s, set_nonsig_tx_testmode, err: %d", __FUNCTION__, err);
-        return BT_ENG_TX_TEST_ERROR;
-    } else
-        bteng_send_back_cmd_result(bteng_client_fd, "set_nosig_tx_testmode_ok\n", 1);
+    // err = sBtInterface->set_nonsig_tx_testmode(enable, is_le, pattern, channel, pac_type, pac_len,
+    //                                            power_type, power_value, pac_cnt);
+    // if (err != BT_STATUS_SUCCESS) {
+    //     BTENG_LOGD("%s, set_nonsig_tx_testmode, err: %d", __FUNCTION__, err);
+    //     return BT_ENG_TX_TEST_ERROR;
+    // } else
+    //     bteng_send_back_cmd_result(bteng_client_fd, "set_nosig_tx_testmode_ok\n", 1);
 
     return BT_ENG_NONE_ERROR;
 }
