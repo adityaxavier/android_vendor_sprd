@@ -99,7 +99,7 @@ endif
 
 ifeq ($(strip $(USE_SPRD_DITHER)) , true)
 LOCAL_SHARED_LIBRARIES += libdither
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/../dither/
+LOCAL_C_INCLUDES += $(TOP)/vendor/sprd/open-source/libs/dither
 LOCAL_CFLAGS += -DSPRD_DITHER_ENABLE
 endif
 
