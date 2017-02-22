@@ -23,7 +23,7 @@ ifeq ($(strip $(USE_SPRD_HWCOMPOSER)),true)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_SHARED_LIBRARIES := liblog libEGL libmemoryheapion libutils libcutils libGLESv1_CM libGLESv2 libhardware libui libsync
+LOCAL_SHARED_LIBRARIES := libHWCUtils liblog libEGL libmemoryheapion libutils libcutils libGLESv1_CM libGLESv2 libhardware libui libsync
 LOCAL_SRC_FILES := SprdHWComposer.cpp \
 		   SprdPrimaryDisplayDevice/SprdFrameBufferHAL.cpp \
 		   AndroidFence.cpp \
@@ -45,6 +45,9 @@ LOCAL_C_INCLUDES := \
 	$(TOP)/vendor/sprd/open-source/libs/libmemoryheapion \
 	$(TOP)/vendor/sprd/open-source/libs/libion_sprd/sc8830/include \
 	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video \
+
+LOCAL_ADDITIONAL_DEPENDENCIES := \
+	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 
 ifeq ($(strip $(TARGET_GPU_PLATFORM)),midgard)
 LOCAL_C_INCLUDES += $(TOP)/vendor/sprd/modules/libgpu/gralloc/midgard

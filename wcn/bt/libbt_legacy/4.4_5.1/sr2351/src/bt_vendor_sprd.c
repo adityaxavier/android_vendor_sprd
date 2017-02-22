@@ -219,7 +219,7 @@ static int op(bt_vendor_opcode_t opcode, void *param)
     int nCnt = 0;
     int nState = -1;
 
-    ALOGI("bt-vendor : op for %d", opcode);
+    // ALOGI("bt-vendor : op for %d", opcode);
 
     switch(opcode)
     {
@@ -683,4 +683,3 @@ int sprd_config_init(int fd, char *bdaddr, struct termios *ti)
 
     return 0;
 }
-

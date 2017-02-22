@@ -62,7 +62,7 @@ int sprd_check_memory(pid_t pid, enum memtrack_type type,
 	unsigned int pid_gl;
 	*num_records = ARRAY_SIZE(record_templates);
 
-	ALOGD("sprd_check_memory begin,pid:%d, type:%d, num records:%d",(int)pid, type, *num_records);
+	// ALOGD("sprd_check_memory begin,pid:%d, type:%d, num records:%d",(int)pid, type, *num_records);
 
 	/* fastpath to return the necessary number of records */
 	if (allocated_records == 0) {
@@ -105,7 +105,7 @@ int sprd_check_memory(pid_t pid, enum memtrack_type type,
 		if (ret != 2) {
 			continue;
 		}
-		ALOGD("sprd_check_memory read line from gl ,pid:%d, size:%x",pid_gl,size);
+		// ALOGD("sprd_check_memory read line from gl ,pid:%d, size:%x",pid_gl,size);
 		if (pid_gl !=(unsigned int)pid)
 			continue;
 
@@ -137,7 +137,7 @@ int sprd_check_memory(pid_t pid, enum memtrack_type type,
 		fclose(smaps_fp);
 	fclose(fp);
 
-	ALOGD("sprd_check_memory end,accounted_size:%d,unaccounted_size:%d",accounted_size,unaccounted_size);
+	// ALOGD("sprd_check_memory end,accounted_size:%d,unaccounted_size:%d",accounted_size,unaccounted_size);
 
 	return 0;
 }

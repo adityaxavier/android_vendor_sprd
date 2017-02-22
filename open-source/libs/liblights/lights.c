@@ -30,7 +30,7 @@
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 
-char const *const LIGHT_BACKLIGHT = "/sys/class/backlight/sprd_backlight/brightness";
+char const *const LIGHT_BACKLIGHT = "/sys/class/backlight/panel/brightness";
 char const *const LIGHT_BUTTONS = "/sys/class/leds/keyboard-backlight/brightness";
 char const *const LIGHT_KEYBOARD = NULL;
 
@@ -86,10 +86,10 @@ struct led leds[NUM_LEDS] = {
 		.on_off = { "/sys/class/leds/blue_bl/on_off", -1},
     },
     [LCD_BACKLIGHT] = {
-        .brightness = { "/sys/class/backlight/sprd_backlight/brightness", -1},
+        .brightness = { "/sys/class/backlight/panel/brightness", -1},
     },
     [BUTTONS_LED] = {
-        .brightness = {"/sys/class/leds/keyboard-backlight/brightness", -1},
+        .brightness = {NULL, -1},
     },
 };
 
@@ -146,7 +146,7 @@ static int write_int(struct led_prop *prop, int value)
 
         already_warned = 0;
 
-        ALOGE("file:%s, func:%s, path=%s, value=%d\n", __FILE__, __func__, prop->filename, value);
+        // ALOGE("file:%s, func:%s, path=%s, value=%d\n", __FILE__, __func__, prop->filename, value);
      //   fd = open(path, O_RDWR);
 		  fd = open(prop->filename, O_RDWR);
 
@@ -189,7 +189,7 @@ static int set_light_backlight(struct light_device_t *dev,
         err = write_int(LIGHT_BACKLIGHT, brightness);
         pthread_mutex_unlock(&g_lock);
 #endif
-        ALOGD("file:%s, func:%s, brightness=%d\n", __FILE__, __func__, brightness);
+        // ALOGD("file:%s, func:%s, brightness=%d\n", __FILE__, __func__, brightness);
         if(NULL==leds[LCD_BACKLIGHT].brightness.filename) {
                 ALOGE("file:%s, func:%s, unsupported light!\n", __FILE__, __func__);
                 return -EINVAL;
@@ -212,7 +212,7 @@ static int set_light_keyboard(struct light_device_t* dev,
         int err = 0;
         int on = is_lit(state);
 
-        ALOGD("file:%s, func:%s, on=%d\n", __FILE__, __func__, on);
+        // ALOGD("file:%s, func:%s, on=%d\n", __FILE__, __func__, on);
         if(NULL==LIGHT_KEYBOARD) {
                 ALOGE("file:%s, func:%s, unsupported light!\n", __FILE__, __func__);
                 return -EINVAL;
@@ -243,7 +243,7 @@ static int set_light_buttons(struct light_device_t* dev,
 #endif
         int on = is_lit(state);
 
-        ALOGD("file:%s, func:%s, on=%d\n", __FILE__, __func__, on);
+        // ALOGD("file:%s, func:%s, on=%d\n", __FILE__, __func__, on);
         if(NULL==leds[BUTTONS_LED].brightness.filename) {
                 ALOGE("file:%s, func:%s, unsupported light!\n", __FILE__, __func__);
                 return -EINVAL;
@@ -259,7 +259,7 @@ static int close_lights(struct light_device_t *dev)
 {
 		int i;
 
-        ALOGV("file:%s, func:%s\n", __FILE__, __func__);
+        // ALOGV("file:%s, func:%s\n", __FILE__, __func__);
 
 	    for (i = 0; i < NUM_LEDS; ++i) {
 	        close_prop(&leds[i].brightness);
@@ -383,7 +383,7 @@ static int set_breath_light(struct light_device_t* dev,
 static int set_light_leds_notifications(struct light_device_t *dev,
                                         struct light_state_t const *state)
 {
-        ALOGE("file:%s, func:%s, unsupported light!\n", __FILE__, __func__);
+        // ALOGE("file:%s, func:%s, unsupported light!\n", __FILE__, __func__);
 		set_breath_light(dev, state);
         return -EINVAL;
 }
@@ -391,7 +391,7 @@ static int set_light_leds_notifications(struct light_device_t *dev,
 static int set_light_leds_attention(struct light_device_t *dev,
                                     struct light_state_t const *state)
 {
-        ALOGE("file:%s, func:%s, unsupported light!\n", __FILE__, __func__);
+        // ALOGE("file:%s, func:%s, unsupported light!\n", __FILE__, __func__);
         return -EINVAL;
 }
 
@@ -401,7 +401,7 @@ static int open_lights(const struct hw_module_t *module, char const *name,
         int (*set_light)(struct light_device_t *dev,
                          struct light_state_t const *state);
 
-        ALOGV("file:%s, func:%s name=%s\n", __FILE__, __func__, name);
+        // ALOGV("file:%s, func:%s name=%s\n", __FILE__, __func__, name);
 
         if (0 == strcmp(LIGHT_ID_BACKLIGHT, name))
                 set_light = set_light_backlight;
@@ -451,4 +451,3 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
         .author = "Google, Inc.",
         .methods = &lights_module_methods,
 };
-
