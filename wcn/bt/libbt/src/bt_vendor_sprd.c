@@ -293,10 +293,15 @@ static void cleanup(void)
     bt_vendor_cbacks = NULL;
 }
 
+static void ssr_cleanup(int reason) {
+    BTVNDDBG("ssr_cleanup %d", reason);
+}
+
 // Entry point of DLib
 const bt_vendor_interface_t BLUETOOTH_VENDOR_LIB_INTERFACE = {
     sizeof(bt_vendor_interface_t),
     init,
     op,
-    cleanup
+    cleanup,
+    ssr_cleanup
 };
